@@ -23,6 +23,38 @@ public class ListadeCompras extends Application{
     @Override
     public void start(Stage palco){
 
+        palco.setTitle("Lista de Compras");
+
+        TextField descricaoItem = new TextField();
+        Button adicionar = new Button("Adicionar");
+        Button exportar = new Exportar("Exportar");
+
+        Label labelAdicionar = new Label("Digite o item que deseja adicionar: ");
+        Label labelListaDeCompras = new Label ("Lista de Compras");
+
+        //Criando objeto ObervableList
+
+        ObservableList<String> observableListaDeCompras = FXCollections.observableArrayList(listaDeCompras);
+        listaDeVisualizacao.setItems(observableListaDeCompras);
+
+
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(labelAdicionar, descricaoItem, adicionar);
+        vbox.getChildren().addAll(listaDeCompras, listaDeVisualizacao, exportar);
+        vbox.setSpacing(10);
+        vbox.setPadding(10);
+
+        adicionar.setOnAction(e -> {
+            String item = descricaoItem.getText();
+            if(!item.isEmpty()){
+                listaDeCompras.add(item);
+                listaDeVisualizacao.getItems().add(item);
+                descricaoItem.clear();
+            } else {
+
+            }
+        });
+
     }
     
 }
