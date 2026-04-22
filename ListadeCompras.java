@@ -50,11 +50,29 @@ public class ListadeCompras extends Application{
                 listaDeCompras.add(item);
                 listaDeVisualizacao.getItems().add(item);
                 descricaoItem.clear();
-            } else {
-
+            }
+        });
+        exportar.setOnAction(e ->{
+            try {
+                File arquivo = new File("listadecompras.txt");
+                PrintWriter writer = new PrintWriter(arquivo);
+                for (String item: listaDeCompras){
+                    writer.println(item);
+                }
+                writer.close();
+            } catch (Exception ex) {
+                System.err.println("Erro ocorrido: " + ex.getMessage());
             }
         });
 
+        Scene scene = new Scene(vbox, 400,400);
+        palco.setScene(scene);
+        palco.show();
+
     }
-    
+ 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }
